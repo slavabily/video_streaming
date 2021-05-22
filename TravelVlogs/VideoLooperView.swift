@@ -35,11 +35,35 @@ class VideoLooperView: UIView {
   let clips: [VideoClip]
   let videoPlayerView = VideoPlayerView()
   
+    private let player = AVQueuePlayer()
+    
   init(clips: [VideoClip]) {
     self.clips = clips
     
     super.init(frame: .zero)
+    
+    initializePlayer()
   }
+    
+    private func initializePlayer() {
+      videoPlayerView.player = player
+        
+        addAllVideosToPlayer()
+        
+        player.volume = 0.0
+        player.play()
+    }
+    
+    private func addAllVideosToPlayer() {
+      for video in clips {
+        //1
+        let asset = AVURLAsset(url: video.url)
+        let item = AVPlayerItem(asset: asset)
+
+        //2
+        player.insert(item, after: player.items().last)
+      }
+    }
   
   // MARK - Unnecessary but necessary Code
   

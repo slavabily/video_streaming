@@ -72,6 +72,14 @@ class VideoLooperView: UIView {
         player.insert(item, after: player.items().last)
       }
     }
+    
+    func pause() {
+      player.pause()
+    }
+
+    func play() {
+      player.play()
+    }
   
   // MARK - Unnecessary but necessary Code
   
